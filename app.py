@@ -123,7 +123,7 @@ footer {visibility: hidden;}
 # ── Model loading ────────────────────────────────────────────
 # We check multiple possible locations for the model folder
 POSSIBLE_PATHS = [
-    r"C:\Users\pc\Desktop\my_model\mohamed_mahmoud_model\final",
+    r"c:\Users\pc\Desktop\modele_ai\mohamed_mahmoud_model\final",
     os.path.join(os.path.dirname(__file__), "mohamed_mahmoud_model", "final"),
     "./mohamed_mahmoud_model/final"
 ]
