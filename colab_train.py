@@ -83,7 +83,7 @@ CONFIG = {
     "data_path": "training_data.jsonl",
 
     # Training hyperparameters (auto-adjusted for GPU/CPU)
-    "epochs": 5 if HAS_GPU else 3,
+    "epochs": 10 if HAS_GPU else 5,
     "batch_size": 4 if HAS_GPU else 8,
     "gradient_accumulation_steps": 4 if HAS_GPU else 2,
     "learning_rate": 2e-4 if HAS_GPU else 3e-4,
@@ -193,10 +193,11 @@ print(f"Model loaded. Parameters: {model.num_parameters():,}")
 
 lora_config = LoraConfig(
     task_type=TaskType.CAUSAL_LM,
-    r=CONFIG["lora_r"],
-    lora_alpha=CONFIG["lora_alpha"],
-    lora_dropout=CONFIG["lora_dropout"],
-    target_modules=["c_attn", "c_proj"],  # GPT-2 attention layers
+    r=32, # Increased rank for better memorization of the 197 pairs
+    lora_alpha=64,
+    lora_dropout=0.05,
+    target_modules=["c_attn", "c_proj"], # GPT-2 attention layers
+    modules_to_save=["wte", "wpe"], # CRITICAL: Save the resized embedding layers for special tokens
     bias="none",
 )
 
