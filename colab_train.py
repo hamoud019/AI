@@ -179,7 +179,7 @@ tokenizer.add_special_tokens(special_tokens)
 
 model = AutoModelForCausalLM.from_pretrained(
     CONFIG["model_name"],
-    torch_dtype=torch.float16 if HAS_GPU else torch.float32,
+    torch_dtype=torch.float32, # Always load in float32 for training stability
 )
 
 # Resize embeddings for new special tokens
